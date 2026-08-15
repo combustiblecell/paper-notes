@@ -12,10 +12,10 @@ LeCun 提出的**可微分自主智能体**蓝图：六个模块全部可反传�
 | 模块 | 功能 | 可训练？ |
 |------|------|---------|
 | **Configurator** | 执行控制：按任务调制其他模块参数与注意力 | ✓ |
-| **Perception** | 传感器 → 分层世界状态 $s[0]$ | ✓ |
+| **Perception** | 传感器 → 分层世界状态 $`s[0]`$ | ✓ |
 | **World Model** | 补全缺失 + 预测未来（含动作条件） | ✓ |
 | **Cost** | 标量 energy = Intrinsic Cost + Critic | IC **不可**训练 |
-| **Short-term Memory** | 存 $(\tau, s_\tau, IC(s_\tau))$，Key-Value 联想记忆 | 存储 |
+| **Short-term Memory** | 存 $`(\tau, s_\tau, IC(s_\tau))`$，Key-Value 联想记忆 | 存储 |
 | **Actor** | Policy（Mode-1）+ Action Optimizer（Mode-2） | ✓ |
 
 原文：“All modules in this model are assumed to be ‘differentiable’… The configurator module takes inputs from all other modules and configures them to perform the task at hand.”（Figure 2 说明，第6页）

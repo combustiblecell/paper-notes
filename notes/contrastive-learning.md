@@ -9,9 +9,9 @@ https://openreview.net/forum?id=BZ5a1r-kVsf
 
 ## InfoNCE 损失（文中 Eq. 9）
 
-$$
+```math
 \mathcal{L} = F(x,y) + \log\left[e^{-F(x,y)} + \sum_{k=1}^{K} e^{-F(x,\hat{y}_k)}\right]
-$$
+```
 
 ## SimCLR 思路
 
@@ -25,16 +25,16 @@ $$
 
 原文（§4.3，第22页）：
 
-> “a disadvantage of contrastive methods is that the number of contrastive samples necessary to make an energy surface adopt a good shape may grow exponentially with the dimension of $y$ space.”
+> “a disadvantage of contrastive methods is that the number of contrastive samples necessary to make an energy surface adopt a good shape may grow exponentially with the dimension of $`y`$ space.”
 
 | | 对比（SimCLR/InfoNCE） | 非对比（VICReg） |
 |--|------------------------|-----------------|
-| 负样本 | 需要大量 $\hat{y}$ | 不需要 |
+| 负样本 | 需要大量 $`\hat{y}`$ | 不需要 |
 | 对比维度 | **样本**维度（batch 内） | **分量**维度（协方差） |
 | 维数灾难 | 可能有 | LeCun 认为更有希望避开 |
 
 ## 和相邻概念的对比
 
 - **VICReg**：JEPA 推荐的非对比替代，见 [vicreg.md](vicreg.md)
-- **MAE**：LeCun 也归为 contrastive（corrupt $y$ 当负例），见 [mae.md](mae.md)
+- **MAE**：LeCun 也归为 contrastive（corrupt $`y`$ 当负例），见 [mae.md](mae.md)
 - **JEPA**：可用 contrastive 训练，但 “doing so runs into the curse of dimensionality”（§4.5，第25页）
