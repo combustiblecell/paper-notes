@@ -35,6 +35,6 @@ LeCun 原文（§4.7，第31页）：
 | 中间表示 | 训练时构造，动作词汇预定义 | **端到端可学习**抽象表征 |
 | 前向模型 | 每层显式 forward model | JEPA predictor 在嵌入空间 |
 | 高层「动作」 | 低层命令 | 下层**状态条件 / 子目标**（§4.7） |
-| 不确定性 | 未重点讨论 | latent \(z\) + MCTS 式 pruning（Figure 17） |
+| 不确定性 | 未重点讨论 | latent $z$ + MCTS 式 pruning（Figure 17） |
 
 H-JEPA 堆叠与训练方式见 [jepa.md](jepa.md)；Mode-2 规划见 [mode-2-planning.md](mode-2-planning.md)。

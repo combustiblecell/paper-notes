@@ -11,24 +11,24 @@ https://openreview.net/forum?id=BZ5a1r-kVsf
 
 **JEPA** = Joint Embedding Predictive Architecture（联合嵌入预测架构）。
 
-- 两路编码器：\(x \rightarrow s_x\)，\(y \rightarrow s_y\)
-- 预测器（可带潜变量 \(z\)）：用 \(s_x\)（和 \(z\)）去对 \(s_y\)
-- 能量就是表征空间里的预测误差：\(E = D(s_y, \mathrm{Pred}(s_x, z))\)
+- 两路编码器：$x \rightarrow s_x$，$y \rightarrow s_y$
+- 预测器（可带潜变量 $z$）：用 $s_x$（和 $z$）去对 $s_y$
+- 能量就是表征空间里的预测误差：$E = D(s_y, \mathrm{Pred}(s_x, z))$
 
-原文：JEPA “is not generative… It merely capture the dependencies between \(x\) and \(y\) without explicitly generating predictions of \(y\).”（§4.4）
+原文：JEPA “is not generative… It merely capture the dependencies between $x$ and $y$ without explicitly generating predictions of $y$.”（§4.4）
 
 ## 为什么叫「非生成式」
 
 | 生成式 | JEPA |
 |--------|------|
-| 直接生成下一帧像素、波形、token | 只预测表征 \(s_y\) |
+| 直接生成下一帧像素、波形、token | 只预测表征 $s_y$ |
 | 必须交代每个细节（树叶、水波） | 编码器可以丢掉难预测、对规划无用的细节 |
 | 视频长期预测几乎不可能准 | 预测「车大概走哪条路」即可 |
 
 多模态未来（车在路口左转或右转）靠两件事表达：
 
-1. **编码器不变性**：多种 \(y\) 映到同一个 \(s_y\)
-2. **潜变量 \(z\)**：扫过集合 \(Z\) 得到一组合理的 \(\tilde{s}_y\)
+1. **编码器不变性**：多种 $y$ 映到同一个 $s_y$
+2. **潜变量 $z$**：扫过集合 $Z$ 得到一组合理的 $\tilde{s}_y$
 
 ## 层次化（H-JEPA）
 
@@ -41,7 +41,7 @@ https://openreview.net/forum?id=BZ5a1r-kVsf
 
 ### JEPA-1 → JEPA-2 层级堆叠
 
-观测序列 \(x_0, x_1, x_2, \ldots\) 经 JEPA-1 提取低层表征并做短期预测；JEPA-2 以 JEPA-1 表征为输入，做长期、更抽象预测。
+观测序列 $x_0, x_1, x_2, \ldots$ 经 JEPA-1 提取低层表征并做短期预测；JEPA-2 以 JEPA-1 表征为输入，做长期、更抽象预测。
 
 原文（Figure 15 说明，第29页）：
 

@@ -9,9 +9,9 @@ https://openreview.net/forum?id=BZ5a1r-kVsf
 
 ## 要点
 
-- 形式：\(\hat{s}_{t+1} = \mathrm{Pred}(s_t, a_t)\)
+- 形式：$\hat{s}_{t+1} = \mathrm{Pred}(s_t, a_t)$
 - 在 Figure 2 架构中，World Model 角色 twofold：（1）补全感知缺失信息；（2）预测自然演化或动作条件下的未来状态（§3）
-- Mode-2 规划时递归 rollout：\(s[t+1] = \mathrm{Pred}(s[t], a[t])\)，再对 \(\sum_t C(s[t])\) 做能量最小化（Figure 4）
+- Mode-2 规划时递归 rollout：$s[t+1] = \mathrm{Pred}(s[t], a[t])$，再对 $\sum_t C(s[t])$ 做能量最小化（Figure 4）
 - 原文把 World Model 称为 “a kind of simulator of the relevant aspects of world”（§3）
 
 ## 历史脉络（文中 §7.1 提及）
@@ -27,9 +27,9 @@ https://openreview.net/forum?id=BZ5a1r-kVsf
 
 | | 经典前向模型 | JEPA 前向模型 |
 |--|-------------|--------------|
-| 预测对象 | 像素 / 低维状态 | 嵌入 \(s_y\) |
+| 预测对象 | 像素 / 低维状态 | 嵌入 $s_y$ |
 | 不可预测细节 | 常硬要重建 | 编码器可丢弃 |
-| 多模态 | 需 GAN/VAE 等 | encoder 不变性 + 潜变量 \(z\) |
+| 多模态 | 需 GAN/VAE 等 | encoder 不变性 + 潜变量 $z$ |
 | 用途 | MPC / Dyna | Mode-2 分层规划（见 [mode-2-planning.md](mode-2-planning.md)） |
 
 与 **Wayne & Abbott 多层前向模型** 的差别：后者每层显式建模低层控制器输出；H-JEPA 在**可学习表征**上堆叠（见 [wayne-abbott-hierarchical-forward.md](wayne-abbott-hierarchical-forward.md)）。

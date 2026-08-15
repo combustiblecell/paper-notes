@@ -5,13 +5,13 @@ https://openreview.net/forum?id=BZ5a1r-kVsf
 
 ## 一句话
 
-在**观测空间**（像素/帧）用潜变量建模多模态未来 \(p(y|x)\) 的三类主流生成式方法；LeCun 将其作为 JEPA 的对照——能生成画面，但难学抽象、浪费容量于不可预测细节。
+在**观测空间**（像素/帧）用潜变量建模多模态未来 $p(y|x)$ 的三类主流生成式方法；LeCun 将其作为 JEPA 的对照——能生成画面，但难学抽象、浪费容量于不可预测细节。
 
 ## 要点
 
 | 方法 | 机制 | 多模态 |
 |------|------|--------|
-| **VAE** | 编码 → 高斯 latent → 解码重建；ELBO | latent 采样不同 \(y\) |
+| **VAE** | 编码 → 高斯 latent → 解码重建；ELBO | latent 采样不同 $y$ |
 | **GAN** | Generator vs Discriminator | 随机噪声 → 不同帧 |
 | **VQ-VAE** | latent 离散化（codebook） | 不同 code → 不同输出 |
 
@@ -29,9 +29,9 @@ https://openreview.net/forum?id=BZ5a1r-kVsf
 
 | | VAE/GAN/VQ-VAE | MAE | JEPA |
 |--|----------------|-----|------|
-| 预测空间 | 像素 \(y\) | 被 mask 像素 | 嵌入 \(s_y\) |
+| 预测空间 | 像素 $y$ | 被 mask 像素 | 嵌入 $s_y$ |
 | 是否生成 | ✓ | ✓（decoder） | ✗ |
-| 多模态 | latent / 对抗 | 通常单峰重建 | 不变性 + \(z\) |
+| 多模态 | latent / 对抗 | 通常单峰重建 | 不变性 + $z$ |
 | LeCun 态度 | 对照组 | 对比式重建 | 主推 |
 
 更一般的潜变量框架见 [latent-variable-generative-model.md](latent-variable-generative-model.md)。
