@@ -38,3 +38,37 @@ https://openreview.net/forum?id=BZ5a1r-kVsf
 - **JEPA-2（高层）**：更抽象，长时预测（大概几点到目的地）
 
 不可预测的细节被高层编码器丢掉。高层动作还可以当作低层的**子目标**，用来做层次规划。
+
+### JEPA-1 → JEPA-2 层级堆叠
+
+观测序列 \(x_0, x_1, x_2, \ldots\) 经 JEPA-1 提取低层表征并做短期预测；JEPA-2 以 JEPA-1 表征为输入，做长期、更抽象预测。
+
+原文（Figure 15 说明，第29页）：
+
+> “JEPA-1 extracts low-level representations and performs short-term predictions. JEPA-2 takes the representations extracted by JEPA-1 as inputs and extracts higher-level representations with which longer-term predictions can be performed.”
+
+### Temporal pooling 粗化表征
+
+层间用 **temporal pooling**（及可选卷积模块）做时间下采样/聚合：
+
+- 时间分辨率降低 → 可预测更远 future
+- 表征更抽象 → 丢弃长期不可预测细节
+
+可 envision “architectures of this type with many levels”（§4.6，第30页）。
+
+### 训练：level-wise vs global
+
+原文（§4.6，第30页）：
+
+> “Training can be performed level-wise or globally, using any non-contrastive method for JEPA.”
+
+| 方式 | 做法 |
+|------|------|
+| **Level-wise** | 先训 JEPA-1，再训 JEPA-2（下层可冻结） |
+| **Global** | 所有层联合端到端训练 |
+
+非对比方法（VICReg 等，见 [vicreg.md](vicreg.md)）两层均适用。
+
+### 与 Wayne & Abbott 的分工
+
+Wayne & Abbott 用多层 forward model 指定 intermediate goals，但中间动作词汇需预定义；H-JEPA 希望中间 plan 表征也**可学习**。详见 [wayne-abbott-hierarchical-forward.md](wayne-abbott-hierarchical-forward.md)。
