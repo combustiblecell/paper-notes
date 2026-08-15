@@ -11,6 +11,7 @@
 - [MAE](notes/mae.md)
 - [InfoNCE / SimCLR（对比学习）](notes/contrastive-learning.md)
 - [Wayne & Abbott 多层前向模型](notes/wayne-abbott-hierarchical-forward.md)
+- [多模态（预测不确定性）](notes/multimodality.md)
 - [非对比自监督（VICReg）](notes/vicreg.md)
 - [Mode-2 规划](notes/mode-2-planning.md)
 - [潜变量生成模型](notes/latent-variable-generative-model.md)
