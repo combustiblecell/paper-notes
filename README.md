@@ -2,8 +2,11 @@
 
 研究笔记仓库。在 Cursor 对话里输入 `@notes` 可把 `notes/` 当作上下文。
 
+**概念关系总览（推荐先看）**：[notes/overview.md](notes/overview.md)
+
 ## 当前笔记
 
+- [概念总览 · 关系图](notes/overview.md)
 - [非生成式层次化 JEPA](notes/jepa.md)
 - [前向模型](notes/forward-model.md)
 - [Figure 2 六模块架构](notes/six-module-architecture.md)
