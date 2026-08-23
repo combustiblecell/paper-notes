@@ -18,6 +18,14 @@
 - [非对比自监督（VICReg）](notes/vicreg.md)
 - [Mode-2 规划](notes/mode-2-planning.md)
 - [潜变量生成模型](notes/latent-variable-generative-model.md)
+- [雷达 ADC](notes/radar-adc.md)
+- [SDDR（占用 + 多普勒）](notes/sddr.md)
+- [定向扩散 + 迭代多普勒精炼](notes/directional-diffusion-idr.md)
+- [PCE 点云提取](notes/pce.md)
+- [EVE 自车速度估计](notes/eve.md)
+- [室外 EVE](notes/outdoor-eve.md)
+- [SOTA（本文评测）](notes/sota.md)
+- [多径鬼影](notes/multipath-ghosting.md)
 
 ## 工作流
 

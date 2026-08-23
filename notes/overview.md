@@ -1,6 +1,10 @@
 # 概念总览 · 关系图
 
-来源主线：LeCun, *A Path Towards Autonomous Machine Intelligence* (2022)  
+两条来源主线：
+
+- LeCun, *A Path Towards Autonomous Machine Intelligence* (2022) → L0–L5
+- Wang et al., *SDDiff* (arXiv:2506.16936v1) → L6–L8
+
 节点对应 `notes/` 下各条笔记；**实线**=组成/实现，**虚线**=对照或历史先驱。
 
 ```mermaid
@@ -34,6 +38,23 @@ flowchart TB
     WA["Wayne & Abbott<br/>wayne-abbott-hierarchical-forward"]
   end
 
+  subgraph L6["L6 · 雷达输入与表示"]
+    ADC["雷达 ADC<br/>radar-adc"]
+    SDDR["SDDR 占用+多普勒<br/>sddr"]
+    GHOST["多径鬼影<br/>multipath-ghosting"]
+  end
+
+  subgraph L7["L7 · SDDiff 纯化"]
+    DIFF["定向扩散 + IDR<br/>directional-diffusion-idr"]
+  end
+
+  subgraph L8["L8 · 雷达任务与尺子"]
+    PCE["点云提取 PCE<br/>pce"]
+    EVE["自车速度 EVE<br/>eve"]
+    OUT["室外 EVE<br/>outdoor-eve"]
+    SOTA["SOTA（本文评测）<br/>sota"]
+  end
+
   ARCH -->|"World Model 模块"| WM
   ARCH -->|"Actor Mode-2"| M2
 
@@ -54,6 +75,18 @@ flowchart TB
   WA -.->|"子目标 / 分层 rollout"| M2
   MULTI -->|"不确定环境下多轨迹"| M2
   WM -->|"Pred(s,a) rollout"| M2
+
+  ADC -->|"FFT + 峰位"| SDDR
+  GHOST -.->|"假占用/高强度"| SDDR
+  GHOST -.->|"只靠强度会误导"| PCE
+  SDDR -->|"纯化对象"| DIFF
+  DIFF -->|"稠密点"| PCE
+  DIFF -->|"速度约束"| EVE
+  PCE -->|"互惠 inlier"| EVE
+  EVE -->|"更难档"| OUT
+  PCE -.->|"VPR/SRL/EGD"| SOTA
+  OUT -.->|"59% 那条"| SOTA
+  LV -.->|"生成式扩散对照"| DIFF
 ```
 
 ## 图例
@@ -65,6 +98,8 @@ flowchart TB
 
 ## 分层阅读顺序（建议）
 
+**JEPA 线**
+
 1. **总架构** → [six-module-architecture.md](six-module-architecture.md)
 2. **世界模型核心** → [forward-model.md](forward-model.md) → [jepa.md](jepa.md)
 3. **怎么训练** → [vicreg.md](vicreg.md)（对照 [contrastive-learning.md](contrastive-learning.md)）
@@ -72,13 +107,21 @@ flowchart TB
 5. **为何不用生成式** → [latent-variable-generative-model.md](latent-variable-generative-model.md) / [vae-gan-vqvae.md](vae-gan-vqvae.md) / [mae.md](mae.md)
 6. **分层先驱** → [wayne-abbott-hierarchical-forward.md](wayne-abbott-hierarchical-forward.md)
 
+**SDDiff 雷达线**
+
+1. **输入** → [radar-adc.md](radar-adc.md) → [sddr.md](sddr.md)
+2. **干扰** → [multipath-ghosting.md](multipath-ghosting.md)
+3. **方法** → [directional-diffusion-idr.md](directional-diffusion-idr.md)
+4. **任务** → [pce.md](pce.md) → [eve.md](eve.md) → [outdoor-eve.md](outdoor-eve.md)
+5. **怎么读表** → [sota.md](sota.md)
+
 ## 三条主轴（一句话）
 
 | 主轴 | 节点链 |
 |------|--------|
-| **架构** | 六模块 → 前向模型 → JEPA → Mode-2 规划 |
-| **训练** | JEPA ← VICReg；对比 InfoNCE/MAE 为对照 |
-| **多模态** | 多模态 ← JEPA + z；生成式 latent 为对照 |
+| **架构（JEPA）** | 六模块 → 前向模型 → JEPA → Mode-2 规划 |
+| **训练（JEPA）** | JEPA ← VICReg；对比 InfoNCE/MAE 为对照 |
+| **雷达感知（SDDiff）** | ADC → SDDR → 定向扩散+IDR → PCE ↔ EVE；鬼影为干扰，SOTA 为尺子 |
 
 ## 笔记索引
 
@@ -95,5 +138,13 @@ flowchart TB
 | [vae-gan-vqvae](vae-gan-vqvae.md) | 像素空间生成式多模态 |
 | [mae](mae.md) | mask 重建像素（对比式） |
 | [wayne-abbott-hierarchical-forward](wayne-abbott-hierarchical-forward.md) | 多层前向模型分层控制先驱 |
+| [radar-adc](radar-adc.md) | 原始采样；SDDiff 的输入，不是 CFAR 点 |
+| [sddr](sddr.md) | 极性占用 + 多普勒，PCE/EVE 的共同表示 |
+| [directional-diffusion-idr](directional-diffusion-idr.md) | 雷达先验定向扩散 + 多普勒一致性精炼 |
+| [pce](pce.md) | 低层抽点；与 EVE 互惠 |
+| [eve](eve.md) | 高层估自车速度；吃纯化后的点/表示 |
+| [outdoor-eve](outdoor-eve.md) | 开阔地更难；文称相对 SOTA +59% |
+| [sota](sota.md) | 本文选定的 PCE/EVE 基线尺子 |
+| [multipath-ghosting](multipath-ghosting.md) | 多径假占用；只靠强度会误导 PCE |
 
 > GitHub 可直接渲染上方 Mermaid。本地若看不到图，用 VS Code Mermaid 插件或 Obsidian。
