@@ -27,6 +27,10 @@
 - [SOTA（本文评测）](notes/sota.md)
 - [多径鬼影](notes/multipath-ghosting.md)
 
+## 论文摘要
+
+- [SDDiff（空间-多普勒扩散）](summary/wang-2025-sddiff.md)
+
 ## 工作流
 
 ```bash
