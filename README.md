@@ -33,6 +33,7 @@
 - [通用 WM taxonomy](notes/general-wm-taxonomy.md)
 - [形式化（式 1）](notes/world-model-formalization.md)
 - [图像 / 鸟瞰图 BEV / 占用 / 点云](notes/image-bev-og-pc.md)
+- [DriveDreamer](notes/drivedreamer.md)
 - [学习式与规则式规划](notes/learning-vs-rule-based.md)
 - [开环回放](notes/open-loop-replay.md)
 - [可控闭环仿真](notes/controllable-closed-loop.md)

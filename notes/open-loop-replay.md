@@ -17,7 +17,7 @@ https://arxiv.org/abs/2501.11260v4
 
 > “they merely replay pre-sampled futures without responding to online control inputs, thus confining research to a data-centric, open-loop paradigm that breaks the causal link between present actions and subsequent observations.”
 
-DriveGAN / MagicDrive / DriveDreamer 一类偏外观；TrafficGen / LCTGen / RealGen 生成交通仍属严格开环。NAVSIM 也被写成非反应式，只有 quasi-closed-loop 分数。批评：智能体动作从不影响被评的未来时，开环指标会夸大安全与性能。
+DriveGAN / MagicDrive / [DriveDreamer](drivedreamer.md) 一类偏外观；TrafficGen / LCTGen / RealGen 生成交通仍属严格开环。NAVSIM 也被写成非反应式，只有 quasi-closed-loop 分数。批评：智能体动作从不影响被评的未来时，开环指标会夸大安全与性能。
 
 中间档（Figure 3(b)，不可控闭环）：自回归世界模型会按自车动作往前滚，但潜物理不透明，用户不能改交规、注入稀有事件或调回放速度。本条不把这一档写成开环。
 

@@ -70,6 +70,7 @@ flowchart TB
     PLAN["学习式与规则式<br/>learning-vs-rule-based"]
     OPEN["开环回放<br/>open-loop-replay"]
     CLOSED["可控闭环仿真<br/>controllable-closed-loop"]
+    DDR["DriveDreamer<br/>drivedreamer"]
   end
 
   ARCH -->|"World Model 模块"| WM
@@ -128,6 +129,10 @@ flowchart TB
   LAT -->|"解码/生成未来"| REPR
   REPR -.->|"常用生成器"| DIFFM
   REPR -.->|"生成式外观"| LV
+  REPR -->|"图像轨实例"| DDR
+  DDR -->|"Auto-DM 扩散"| DIFFM
+  DDR -.->|"综述归开环生成"| OPEN
+  DDR -->|"也出未来动作"| PLAN
   REPR -.->|"点云轨 ≠ 雷达 PCE"| PCE
   PLAN -->|"学习式 MPC/想象"| M2
   PLAN -.->|"规则式可审计对照"| M2
@@ -169,7 +174,7 @@ flowchart TB
 1. **通用对照** → [general-wm-taxonomy.md](general-wm-taxonomy.md)（Ding 理解/预测；Zhu 视频/驾驶/智能体）
 2. **形式化** → [world-model-formalization.md](world-model-formalization.md)
 3. **输入与编码** → [heterogeneous-sensors.md](heterogeneous-sensors.md) → [multi-sensor-latent-state.md](multi-sensor-latent-state.md)
-4. **未来怎么画** → [image-bev-og-pc.md](image-bev-og-pc.md)
+4. **未来怎么画** → [image-bev-og-pc.md](image-bev-og-pc.md)（图像轨例子：[drivedreamer.md](drivedreamer.md)）
 5. **轨迹怎么出** → [learning-vs-rule-based.md](learning-vs-rule-based.md)
 6. **怎么评交互** → [open-loop-replay.md](open-loop-replay.md) → [controllable-closed-loop.md](controllable-closed-loop.md)
 7. **为何要想象** → [long-tail-scenario.md](long-tail-scenario.md)
@@ -213,6 +218,7 @@ flowchart TB
 | [general-wm-taxonomy](general-wm-taxonomy.md) | 通用刀：Ding 理解/预测；Zhu 视频/驾驶/智能体 |
 | [world-model-formalization](world-model-formalization.md) | $`\bm{w}(I,P)\to(z,\tau)`$ |
 | [image-bev-og-pc](image-bev-og-pc.md) | 透视图像 / 鸟瞰图 BEV / 占用 / 点云 |
+| [drivedreamer](drivedreamer.md) | 实路扩散：条件生成驾驶视频 + 开环动作 |
 | [learning-vs-rule-based](learning-vs-rule-based.md) | 轨迹：规则可审计 vs 学习能扛交互 |
 | [open-loop-replay](open-loop-replay.md) | 重放既定未来，动作不改下一观测 |
 | [controllable-closed-loop](controllable-closed-loop.md) | 动作改未来，且可编辑/注入长尾 |
