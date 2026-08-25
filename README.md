@@ -29,6 +29,11 @@
 - [异构传感器](notes/heterogeneous-sensors.md)
 - [多传感器压成潜状态](notes/multi-sensor-latent-state.md)
 - [长尾场景](notes/long-tail-scenario.md)
+- [形式化（式 1）](notes/world-model-formalization.md)
+- [图像 / BEV / 占用 / 点云](notes/image-bev-og-pc.md)
+- [学习式与规则式规划](notes/learning-vs-rule-based.md)
+- [开环回放](notes/open-loop-replay.md)
+- [可控闭环仿真](notes/controllable-closed-loop.md)
 
 ## 论文摘要
 

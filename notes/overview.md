@@ -57,9 +57,17 @@ flowchart TB
   end
 
   subgraph L9["L9 · 驾驶 WM 综述用语"]
+    FORM["形式化 式(1)<br/>world-model-formalization"]
     HET["异构传感器<br/>heterogeneous-sensors"]
     LAT["多传感器潜状态<br/>multi-sensor-latent-state"]
     TAIL["长尾场景<br/>long-tail-scenario"]
+  end
+
+  subgraph L10["L10 · 综述三层分类"]
+    REPR["图像/BEV/占用/点云<br/>image-bev-og-pc"]
+    PLAN["学习式与规则式<br/>learning-vs-rule-based"]
+    OPEN["开环回放<br/>open-loop-replay"]
+    CLOSED["可控闭环仿真<br/>controllable-closed-loop"]
   end
 
   ARCH -->|"World Model 模块"| WM
@@ -101,6 +109,21 @@ flowchart TB
   HET -->|"雷达是其中一种"| ADC
   TAIL -.->|"稀有天气/施工/异常驾驶"| LAT
   TAIL -.->|"生成式补数据"| LV
+
+  HET -->|"观测 I,P"| FORM
+  FORM -->|"场景 z"| LAT
+  FORM -->|"轨迹 τ"| PLAN
+  FORM -->|"驾驶版 Pred"| WM
+  LAT -->|"解码/生成未来"| REPR
+  REPR -.->|"生成式外观"| LV
+  REPR -.->|"点云轨 ≠ 雷达 PCE"| PCE
+  PLAN -->|"学习式 MPC/想象"| M2
+  PLAN -.->|"规则式可审计对照"| M2
+  OPEN -.->|"不响应动作"| CLOSED
+  OPEN -.->|"因果链断开"| FORM
+  CLOSED -->|"动作条件前滚"| WM
+  CLOSED -->|"可注入稀有事件"| TAIL
+  CLOSED -->|"闭环沙盒"| M2
 ```
 
 ## 图例
@@ -129,11 +152,14 @@ flowchart TB
 4. **任务** → [pce.md](pce.md) → [eve.md](eve.md) → [outdoor-eve.md](outdoor-eve.md)
 5. **怎么读表** → [sota.md](sota.md)
 
-**驾驶 WM 综述用语（Feng et al.）**
+**驾驶 WM 综述（Feng et al.）**
 
-1. **输入种类** → [heterogeneous-sensors.md](heterogeneous-sensors.md)
-2. **怎么编码** → [multi-sensor-latent-state.md](multi-sensor-latent-state.md)
-3. **为何要想象未来** → [long-tail-scenario.md](long-tail-scenario.md)
+1. **形式化** → [world-model-formalization.md](world-model-formalization.md)
+2. **输入与编码** → [heterogeneous-sensors.md](heterogeneous-sensors.md) → [multi-sensor-latent-state.md](multi-sensor-latent-state.md)
+3. **未来怎么画** → [image-bev-og-pc.md](image-bev-og-pc.md)
+4. **轨迹怎么出** → [learning-vs-rule-based.md](learning-vs-rule-based.md)
+5. **怎么评交互** → [open-loop-replay.md](open-loop-replay.md) → [controllable-closed-loop.md](controllable-closed-loop.md)
+6. **为何要想象** → [long-tail-scenario.md](long-tail-scenario.md)
 
 ## 三条主轴（一句话）
 
@@ -142,7 +168,7 @@ flowchart TB
 | **架构（JEPA）** | 六模块 → 前向模型 → JEPA → Mode-2 规划 |
 | **训练（JEPA）** | JEPA ← VICReg；对比 InfoNCE/MAE 为对照 |
 | **雷达感知（SDDiff）** | ADC → SDDR → 定向扩散+IDR → PCE ↔ EVE；鬼影为干扰，SOTA 为尺子 |
-| **驾驶 WM 用语（综述）** | 异构传感器 → 压成潜状态 → 前向模型；长尾靠潜空间/生成补稀有情况 |
+| **驾驶 WM 用语（综述）** | 形式化 $`z,\tau`$ ← 异构传感器压成潜状态；$`z`$ 走图像/BEV/OG/PC，$`\tau`$ 走规则或学习；评测从开环回放到可控闭环；长尾靠生成/闭环注入 |
 
 ## 笔记索引
 
@@ -170,5 +196,10 @@ flowchart TB
 | [heterogeneous-sensors](heterogeneous-sensors.md) | 相机/LiDAR/雷达等收进同一环境表示 |
 | [multi-sensor-latent-state](multi-sensor-latent-state.md) | 多传感器压缩成可前滚的潜状态 |
 | [long-tail-scenario](long-tail-scenario.md) | 稀有危险情形；生成/排练补数据 |
+| [world-model-formalization](world-model-formalization.md) | $`\bm{w}(I,P)\to(z,\tau)`$ |
+| [image-bev-og-pc](image-bev-og-pc.md) | 未来世界四条生成轨 |
+| [learning-vs-rule-based](learning-vs-rule-based.md) | 轨迹：规则可审计 vs 学习能扛交互 |
+| [open-loop-replay](open-loop-replay.md) | 重放既定未来，动作不改下一观测 |
+| [controllable-closed-loop](controllable-closed-loop.md) | 动作改未来，且可编辑/注入长尾 |
 
 > GitHub 可直接渲染上方 Mermaid。本地若看不到图，用 VS Code Mermaid 插件或 Obsidian。
