@@ -29,6 +29,7 @@
 - [异构传感器](notes/heterogeneous-sensors.md)
 - [多传感器压成潜状态](notes/multi-sensor-latent-state.md)
 - [长尾场景](notes/long-tail-scenario.md)
+- [通用 WM taxonomy](notes/general-wm-taxonomy.md)
 - [形式化（式 1）](notes/world-model-formalization.md)
 - [图像 / BEV / 占用 / 点云](notes/image-bev-og-pc.md)
 - [学习式与规则式规划](notes/learning-vs-rule-based.md)

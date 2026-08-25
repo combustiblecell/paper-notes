@@ -57,6 +57,7 @@ flowchart TB
   end
 
   subgraph L9["L9 · 驾驶 WM 综述用语"]
+    GTAX["通用 WM taxonomy<br/>general-wm-taxonomy"]
     FORM["形式化 式(1)<br/>world-model-formalization"]
     HET["异构传感器<br/>heterogeneous-sensors"]
     LAT["多传感器潜状态<br/>multi-sensor-latent-state"]
@@ -102,6 +103,11 @@ flowchart TB
   PCE -.->|"VPR/SRL/EGD"| SOTA
   OUT -.->|"59% 那条"| SOTA
   LV -.->|"生成式扩散对照"| DIFF
+
+  GTAX -.->|"驾驶只是应用之一"| FORM
+  GTAX -.->|"理解 / 内部表征"| JEPA
+  GTAX -.->|"预测 / 视频生成"| LV
+  GTAX -->|"Ha–Schmidhuber 前向"| WM
 
   HET -->|"压缩进同一表示"| LAT
   LAT -->|"驾驶版 WM"| WM
@@ -154,12 +160,13 @@ flowchart TB
 
 **驾驶 WM 综述（Feng et al.）**
 
-1. **形式化** → [world-model-formalization.md](world-model-formalization.md)
-2. **输入与编码** → [heterogeneous-sensors.md](heterogeneous-sensors.md) → [multi-sensor-latent-state.md](multi-sensor-latent-state.md)
-3. **未来怎么画** → [image-bev-og-pc.md](image-bev-og-pc.md)
-4. **轨迹怎么出** → [learning-vs-rule-based.md](learning-vs-rule-based.md)
-5. **怎么评交互** → [open-loop-replay.md](open-loop-replay.md) → [controllable-closed-loop.md](controllable-closed-loop.md)
-6. **为何要想象** → [long-tail-scenario.md](long-tail-scenario.md)
+1. **通用对照** → [general-wm-taxonomy.md](general-wm-taxonomy.md)（Ding 理解/预测；Zhu 视频/驾驶/智能体）
+2. **形式化** → [world-model-formalization.md](world-model-formalization.md)
+3. **输入与编码** → [heterogeneous-sensors.md](heterogeneous-sensors.md) → [multi-sensor-latent-state.md](multi-sensor-latent-state.md)
+4. **未来怎么画** → [image-bev-og-pc.md](image-bev-og-pc.md)
+5. **轨迹怎么出** → [learning-vs-rule-based.md](learning-vs-rule-based.md)
+6. **怎么评交互** → [open-loop-replay.md](open-loop-replay.md) → [controllable-closed-loop.md](controllable-closed-loop.md)
+7. **为何要想象** → [long-tail-scenario.md](long-tail-scenario.md)
 
 ## 三条主轴（一句话）
 
@@ -168,7 +175,7 @@ flowchart TB
 | **架构（JEPA）** | 六模块 → 前向模型 → JEPA → Mode-2 规划 |
 | **训练（JEPA）** | JEPA ← VICReg；对比 InfoNCE/MAE 为对照 |
 | **雷达感知（SDDiff）** | ADC → SDDR → 定向扩散+IDR → PCE ↔ EVE；鬼影为干扰，SOTA 为尺子 |
-| **驾驶 WM 用语（综述）** | 形式化 $`z,\tau`$ ← 异构传感器压成潜状态；$`z`$ 走图像/BEV/OG/PC，$`\tau`$ 走规则或学习；评测从开环回放到可控闭环；长尾靠生成/闭环注入 |
+| **驾驶 WM 用语（综述）** | 通用 taxonomy（理解/预测或视频/驾驶/智能体）对照驾驶三层；形式化 $`z,\tau`$ ← 异构传感器压成潜状态；$`z`$ 走图像/BEV/OG/PC，$`\tau`$ 走规则或学习；评测从开环回放到可控闭环 |
 
 ## 笔记索引
 
@@ -196,6 +203,7 @@ flowchart TB
 | [heterogeneous-sensors](heterogeneous-sensors.md) | 相机/LiDAR/雷达等收进同一环境表示 |
 | [multi-sensor-latent-state](multi-sensor-latent-state.md) | 多传感器压缩成可前滚的潜状态 |
 | [long-tail-scenario](long-tail-scenario.md) | 稀有危险情形；生成/排练补数据 |
+| [general-wm-taxonomy](general-wm-taxonomy.md) | 通用刀：Ding 理解/预测；Zhu 视频/驾驶/智能体 |
 | [world-model-formalization](world-model-formalization.md) | $`\bm{w}(I,P)\to(z,\tau)`$ |
 | [image-bev-og-pc](image-bev-og-pc.md) | 未来世界四条生成轨 |
 | [learning-vs-rule-based](learning-vs-rule-based.md) | 轨迹：规则可审计 vs 学习能扛交互 |
