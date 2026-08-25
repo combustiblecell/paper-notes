@@ -73,6 +73,7 @@ flowchart TB
     DDR["DriveDreamer<br/>drivedreamer"]
     DDR2["DriveDreamer-2<br/>drivedreamer-2"]
     RDR["ReconDreamer<br/>recondreamer"]
+    WDR["WorldDreamer<br/>worlddreamer"]
   end
 
   ARCH -->|"World Model 模块"| WM
@@ -142,6 +143,9 @@ flowchart TB
   DDR -->|"加 LLM 条件"| DDR2
   DDR2 -->|"HDMap+视频扩散"| DIFFM
   DDR2 -.->|"文本→稀有场景"| TAIL
+  WDR -.->|"同作者群, 走 Transformer 掩码预测"| DDR
+  WDR -->|"VQGAN 分词 + STPT 掩码预测"| REPR
+  WDR -.->|"对标扩散, 声称约 3× 更快"| DIFFM
   REPR -.->|"点云轨 ≠ 雷达 PCE"| PCE
   PLAN -->|"学习式 MPC/想象"| M2
   PLAN -.->|"规则式可审计对照"| M2
@@ -183,7 +187,7 @@ flowchart TB
 1. **通用对照** → [general-wm-taxonomy.md](general-wm-taxonomy.md)（Ding 理解/预测；Zhu 视频/驾驶/智能体）
 2. **形式化** → [world-model-formalization.md](world-model-formalization.md)
 3. **输入与编码** → [heterogeneous-sensors.md](heterogeneous-sensors.md) → [multi-sensor-latent-state.md](multi-sensor-latent-state.md)
-4. **未来怎么画** → [image-bev-og-pc.md](image-bev-og-pc.md)（图像轨：[drivedreamer.md](drivedreamer.md) 生成；[drivedreamer-2.md](drivedreamer-2.md) 文本定制；[recondreamer.md](recondreamer.md) 新轨迹重建）
+4. **未来怎么画** → [image-bev-og-pc.md](image-bev-og-pc.md)（图像轨：[drivedreamer.md](drivedreamer.md) 生成；[drivedreamer-2.md](drivedreamer-2.md) 文本定制；[recondreamer.md](recondreamer.md) 新轨迹重建；[worlddreamer.md](worlddreamer.md) Transformer 掩码预测走通用世界）
 5. **轨迹怎么出** → [learning-vs-rule-based.md](learning-vs-rule-based.md)
 6. **怎么评交互** → [open-loop-replay.md](open-loop-replay.md) → [controllable-closed-loop.md](controllable-closed-loop.md)
 7. **为何要想象** → [long-tail-scenario.md](long-tail-scenario.md)
@@ -230,6 +234,7 @@ flowchart TB
 | [drivedreamer](drivedreamer.md) | 实路扩散：条件生成驾驶视频 + 开环动作 |
 | [drivedreamer-2](drivedreamer-2.md) | LLM 把文本变成轨迹+地图，再扩散出多视角视频 |
 | [recondreamer](recondreamer.md) | 在线修复新轨迹渲染，服务闭环仿真 |
+| [worlddreamer](worlddreamer.md) | VQGAN+STPT 掩码预测 token，Transformer 路线通用世界视频 |
 | [learning-vs-rule-based](learning-vs-rule-based.md) | 轨迹：规则可审计 vs 学习能扛交互 |
 | [open-loop-replay](open-loop-replay.md) | 重放既定未来，动作不改下一观测 |
 | [controllable-closed-loop](controllable-closed-loop.md) | 动作改未来，且可编辑/注入长尾 |
