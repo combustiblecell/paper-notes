@@ -35,7 +35,7 @@ LeCun 2022 立场文对照的是 VAE/GAN/VQ-VAE，**未把扩散写成主对照*
 | [VAE / GAN / VQ-VAE](vae-gan-vqvae.md) | 同属观测空间生成；扩散用逐步去噪，不是一次解码或对抗 |
 | [潜变量生成模型](latent-variable-generative-model.md) | 扩散采样时的噪声/时间步扮演「未观测自由度」；仍会画出 $`y`$，JEPA 不画 |
 | [JEPA](jepa.md) | 非生成式、预测 $`s_y`$；扩散要重建或合成像素/体素/点 |
-| [图像/BEV/占用/点云](image-bev-og-pc.md) | 四条轨是**表示**；扩散常是上面的**生成器** |
+| [图像/鸟瞰图 BEV/占用/点云](image-bev-og-pc.md) | 四条轨是**表示**；扩散常是上面的**生成器** |
 | [长尾场景](long-tail-scenario.md) | 综述把扩散当成补稀有数据的主要手段之一 |
 | [定向扩散 + IDR](directional-diffusion-idr.md) | 雷达纯化任务上的特化：先验 + 多普勒 critic，不是通用文生视频 |
 | [开环回放](open-loop-replay.md) | 很多扩散驾驶视频仍不响应在线动作；生成器 ≠ 闭环世界模型 |

@@ -66,7 +66,7 @@ flowchart TB
   end
 
   subgraph L10["L10 · 综述三层分类"]
-    REPR["图像/BEV/占用/点云<br/>image-bev-og-pc"]
+    REPR["图像/鸟瞰BEV/占用/点云<br/>image-bev-og-pc"]
     PLAN["学习式与规则式<br/>learning-vs-rule-based"]
     OPEN["开环回放<br/>open-loop-replay"]
     CLOSED["可控闭环仿真<br/>controllable-closed-loop"]
@@ -181,7 +181,7 @@ flowchart TB
 | **架构（JEPA）** | 六模块 → 前向模型 → JEPA → Mode-2 规划 |
 | **训练（JEPA）** | JEPA ← VICReg；对比 InfoNCE/MAE 为对照；扩散/VAE 为观测空间生成对照 |
 | **雷达感知（SDDiff）** | ADC → SDDR → 定向扩散+IDR → PCE ↔ EVE；鬼影为干扰，SOTA 为尺子 |
-| **驾驶 WM 用语（综述）** | 通用 taxonomy（理解/预测或视频/驾驶/智能体）对照驾驶三层；形式化 $`z,\tau`$ ← 异构传感器压成潜状态；$`z`$ 走图像/BEV/OG/PC，$`\tau`$ 走规则或学习；评测从开环回放到可控闭环 |
+| **驾驶 WM 用语（综述）** | 通用 taxonomy（理解/预测或视频/驾驶/智能体）对照驾驶三层；形式化 $`z,\tau`$ ← 异构传感器压成潜状态；$`z`$ 走图像/鸟瞰 BEV/OG/PC，$`\tau`$ 走规则或学习；评测从开环回放到可控闭环 |
 
 ## 笔记索引
 
@@ -212,7 +212,7 @@ flowchart TB
 | [long-tail-scenario](long-tail-scenario.md) | 稀有危险情形；生成/排练补数据 |
 | [general-wm-taxonomy](general-wm-taxonomy.md) | 通用刀：Ding 理解/预测；Zhu 视频/驾驶/智能体 |
 | [world-model-formalization](world-model-formalization.md) | $`\bm{w}(I,P)\to(z,\tau)`$ |
-| [image-bev-og-pc](image-bev-og-pc.md) | 未来世界四条生成轨 |
+| [image-bev-og-pc](image-bev-og-pc.md) | 透视图像 / 鸟瞰图 BEV / 占用 / 点云 |
 | [learning-vs-rule-based](learning-vs-rule-based.md) | 轨迹：规则可审计 vs 学习能扛交互 |
 | [open-loop-replay](open-loop-replay.md) | 重放既定未来，动作不改下一观测 |
 | [controllable-closed-loop](controllable-closed-loop.md) | 动作改未来，且可编辑/注入长尾 |

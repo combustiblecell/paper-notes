@@ -13,7 +13,7 @@
 | 通用 WM | Zhu et al. 2024；Ding et al. 2024b | 驾驶只是应用之一 |
 | 驾驶 WM | Guan et al. 2024；Fu et al. 2024b | 分类粗，常只谈仿真，缺少规划–预测交互 |
 
-Feng 自己的刀是驾驶专用三层（见 L10：[图像/BEV/占用/点云](image-bev-og-pc.md)、[学习式与规则式](learning-vs-rule-based.md)、[开环](open-loop-replay.md)→[可控闭环](controllable-closed-loop.md)），不要和下面两条通用刀混成一张表。
+Feng 自己的刀是驾驶专用三层（见 L10：[图像/鸟瞰图 BEV/占用/点云](image-bev-og-pc.md)、[学习式与规则式](learning-vs-rule-based.md)、[开环](open-loop-replay.md)→[可控闭环](controllable-closed-loop.md)），不要和下面两条通用刀混成一张表。
 
 ## Ding：两功能（理解 vs 预测）
 

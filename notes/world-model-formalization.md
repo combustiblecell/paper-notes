@@ -25,6 +25,6 @@ https://arxiv.org/abs/2501.11260v4
 | 概念 | 差别 |
 |------|------|
 | [多传感器压成潜状态](multi-sensor-latent-state.md) | 潜状态是 $`\bm{z}`$ 这一侧；形式化还同时要轨迹 $`\tau`$ |
-| [图像/BEV/占用/点云](image-bev-og-pc.md) | $`\bm{z}`$ 可以实例化成这四条生成轨 |
+| [图像/鸟瞰图 BEV/占用/点云](image-bev-og-pc.md) | $`\bm{z}`$ 可以实例化成这四条生成轨 |
 | [学习式与规则式](learning-vs-rule-based.md) | 规划任务怎么出 $`\tau`$ |
 | [前向模型](forward-model.md) | LeCun 写成 $`\hat{s}_{t+1}=\mathrm{Pred}(s_t,a_t)`$；这里把观测显式写成 $`I,P`$，输出拆成场景+轨迹 |
