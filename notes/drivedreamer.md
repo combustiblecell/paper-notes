@@ -16,7 +16,7 @@ https://arxiv.org/abs/2309.09777
 1. **Auto-DM** 先吃结构化交通条件（地图、框）学生成单帧再学视频，缩小像素搜索空间。
 2. 再用动作去更新未来结构条件，做视频预测，并出未来策略。
 
-后续同系列（综述表，不是本条主体）：DriveDreamer-2 加 LLM 提示；DriveDreamer4D 走向 4D 视频/4DGS。
+后续同系列（综述表，不是本条主体）：DriveDreamer-2 加 LLM 提示；DriveDreamer4D 走向 4D 视频/4DGS。新轨迹重建见 [ReconDreamer](recondreamer.md)。
 
 ## 综述怎么归类
 
