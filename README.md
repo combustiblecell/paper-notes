@@ -30,6 +30,7 @@
 ## 论文摘要
 
 - [SDDiff（空间-多普勒扩散）](summary/wang-2025-sddiff.md)
+- [世界模型与自动驾驶综述](summary/feng-2025-survey-world-models-ad.md)
 
 ## 工作流
 
