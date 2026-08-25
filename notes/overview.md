@@ -32,6 +32,7 @@ flowchart TB
   subgraph L4["L4 · 对照路线"]
     LV["潜变量生成模型<br/>latent-variable-generative-model"]
     VAE["VAE / GAN / VQ-VAE<br/>vae-gan-vqvae"]
+    DIFFM["扩散模型<br/>diffusion-model"]
     MAE["MAE<br/>mae"]
   end
 
@@ -84,6 +85,8 @@ flowchart TB
 
   JEPA -.->|"非生成式替代"| LV
   LV --> VAE
+  LV --> DIFFM
+  DIFFM -.->|"同属观测空间生成"| VAE
   JEPA -.->|"不重建像素"| MAE
   MULTI -.->|"z 采样多分支"| LV
 
@@ -102,11 +105,12 @@ flowchart TB
   EVE -->|"更难档"| OUT
   PCE -.->|"VPR/SRL/EGD"| SOTA
   OUT -.->|"59% 那条"| SOTA
-  LV -.->|"生成式扩散对照"| DIFF
+  DIFFM -->|"雷达先验变体"| DIFF
 
   GTAX -.->|"驾驶只是应用之一"| FORM
   GTAX -.->|"理解 / 内部表征"| JEPA
   GTAX -.->|"预测 / 视频生成"| LV
+  GTAX -.->|"Sora 一类生成器"| DIFFM
   GTAX -->|"Ha–Schmidhuber 前向"| WM
 
   HET -->|"压缩进同一表示"| LAT
@@ -114,6 +118,7 @@ flowchart TB
   LAT -->|"表征空间预测"| JEPA
   HET -->|"雷达是其中一种"| ADC
   TAIL -.->|"稀有天气/施工/异常驾驶"| LAT
+  TAIL -.->|"扩散补稀有数据"| DIFFM
   TAIL -.->|"生成式补数据"| LV
 
   HET -->|"观测 I,P"| FORM
@@ -121,6 +126,7 @@ flowchart TB
   FORM -->|"轨迹 τ"| PLAN
   FORM -->|"驾驶版 Pred"| WM
   LAT -->|"解码/生成未来"| REPR
+  REPR -.->|"常用生成器"| DIFFM
   REPR -.->|"生成式外观"| LV
   REPR -.->|"点云轨 ≠ 雷达 PCE"| PCE
   PLAN -->|"学习式 MPC/想象"| M2
@@ -147,7 +153,7 @@ flowchart TB
 2. **世界模型核心** → [forward-model.md](forward-model.md) → [jepa.md](jepa.md)
 3. **怎么训练** → [vicreg.md](vicreg.md)（对照 [contrastive-learning.md](contrastive-learning.md)）
 4. **多模态与规划** → [multimodality.md](multimodality.md) → [mode-2-planning.md](mode-2-planning.md)
-5. **为何不用生成式** → [latent-variable-generative-model.md](latent-variable-generative-model.md) / [vae-gan-vqvae.md](vae-gan-vqvae.md) / [mae.md](mae.md)
+5. **为何不用生成式** → [latent-variable-generative-model.md](latent-variable-generative-model.md) / [vae-gan-vqvae.md](vae-gan-vqvae.md) / [diffusion-model.md](diffusion-model.md) / [mae.md](mae.md)
 6. **分层先驱** → [wayne-abbott-hierarchical-forward.md](wayne-abbott-hierarchical-forward.md)
 
 **SDDiff 雷达线**
@@ -173,7 +179,7 @@ flowchart TB
 | 主轴 | 节点链 |
 |------|--------|
 | **架构（JEPA）** | 六模块 → 前向模型 → JEPA → Mode-2 规划 |
-| **训练（JEPA）** | JEPA ← VICReg；对比 InfoNCE/MAE 为对照 |
+| **训练（JEPA）** | JEPA ← VICReg；对比 InfoNCE/MAE 为对照；扩散/VAE 为观测空间生成对照 |
 | **雷达感知（SDDiff）** | ADC → SDDR → 定向扩散+IDR → PCE ↔ EVE；鬼影为干扰，SOTA 为尺子 |
 | **驾驶 WM 用语（综述）** | 通用 taxonomy（理解/预测或视频/驾驶/智能体）对照驾驶三层；形式化 $`z,\tau`$ ← 异构传感器压成潜状态；$`z`$ 走图像/BEV/OG/PC，$`\tau`$ 走规则或学习；评测从开环回放到可控闭环 |
 
@@ -190,6 +196,7 @@ flowchart TB
 | [mode-2-planning](mode-2-planning.md) | 世界模型内 MPC |
 | [latent-variable-generative-model](latent-variable-generative-model.md) | $`z`$ 参数化相容 $`y`$ 集合 |
 | [vae-gan-vqvae](vae-gan-vqvae.md) | 像素空间生成式多模态 |
+| [diffusion-model](diffusion-model.md) | 逐步去噪采样；驾驶综述里的主力生成器 |
 | [mae](mae.md) | mask 重建像素（对比式） |
 | [wayne-abbott-hierarchical-forward](wayne-abbott-hierarchical-forward.md) | 多层前向模型分层控制先驱 |
 | [radar-adc](radar-adc.md) | 原始采样；SDDiff 的输入，不是 CFAR 点 |
