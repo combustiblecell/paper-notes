@@ -26,6 +26,9 @@
 - [室外 EVE](notes/outdoor-eve.md)
 - [SOTA（本文评测）](notes/sota.md)
 - [多径鬼影](notes/multipath-ghosting.md)
+- [异构传感器](notes/heterogeneous-sensors.md)
+- [多传感器压成潜状态](notes/multi-sensor-latent-state.md)
+- [长尾场景](notes/long-tail-scenario.md)
 
 ## 论文摘要
 

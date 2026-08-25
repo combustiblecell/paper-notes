@@ -4,6 +4,7 @@
 
 - LeCun, *A Path Towards Autonomous Machine Intelligence* (2022) → L0–L5
 - Wang et al., *SDDiff* (arXiv:2506.16936v1) → L6–L8
+- Feng et al., *A Survey of World Models for Autonomous Driving* (arXiv:2501.11260v4) → L9
 
 节点对应 `notes/` 下各条笔记；**实线**=组成/实现，**虚线**=对照或历史先驱。
 
@@ -55,6 +56,12 @@ flowchart TB
     SOTA["SOTA（本文评测）<br/>sota"]
   end
 
+  subgraph L9["L9 · 驾驶 WM 综述用语"]
+    HET["异构传感器<br/>heterogeneous-sensors"]
+    LAT["多传感器潜状态<br/>multi-sensor-latent-state"]
+    TAIL["长尾场景<br/>long-tail-scenario"]
+  end
+
   ARCH -->|"World Model 模块"| WM
   ARCH -->|"Actor Mode-2"| M2
 
@@ -87,6 +94,13 @@ flowchart TB
   PCE -.->|"VPR/SRL/EGD"| SOTA
   OUT -.->|"59% 那条"| SOTA
   LV -.->|"生成式扩散对照"| DIFF
+
+  HET -->|"压缩进同一表示"| LAT
+  LAT -->|"驾驶版 WM"| WM
+  LAT -->|"表征空间预测"| JEPA
+  HET -->|"雷达是其中一种"| ADC
+  TAIL -.->|"稀有天气/施工/异常驾驶"| LAT
+  TAIL -.->|"生成式补数据"| LV
 ```
 
 ## 图例
@@ -115,6 +129,12 @@ flowchart TB
 4. **任务** → [pce.md](pce.md) → [eve.md](eve.md) → [outdoor-eve.md](outdoor-eve.md)
 5. **怎么读表** → [sota.md](sota.md)
 
+**驾驶 WM 综述用语（Feng et al.）**
+
+1. **输入种类** → [heterogeneous-sensors.md](heterogeneous-sensors.md)
+2. **怎么编码** → [multi-sensor-latent-state.md](multi-sensor-latent-state.md)
+3. **为何要想象未来** → [long-tail-scenario.md](long-tail-scenario.md)
+
 ## 三条主轴（一句话）
 
 | 主轴 | 节点链 |
@@ -122,6 +142,7 @@ flowchart TB
 | **架构（JEPA）** | 六模块 → 前向模型 → JEPA → Mode-2 规划 |
 | **训练（JEPA）** | JEPA ← VICReg；对比 InfoNCE/MAE 为对照 |
 | **雷达感知（SDDiff）** | ADC → SDDR → 定向扩散+IDR → PCE ↔ EVE；鬼影为干扰，SOTA 为尺子 |
+| **驾驶 WM 用语（综述）** | 异构传感器 → 压成潜状态 → 前向模型；长尾靠潜空间/生成补稀有情况 |
 
 ## 笔记索引
 
@@ -146,5 +167,8 @@ flowchart TB
 | [outdoor-eve](outdoor-eve.md) | 开阔地更难；文称相对 SOTA +59% |
 | [sota](sota.md) | 本文选定的 PCE/EVE 基线尺子 |
 | [multipath-ghosting](multipath-ghosting.md) | 多径假占用；只靠强度会误导 PCE |
+| [heterogeneous-sensors](heterogeneous-sensors.md) | 相机/LiDAR/雷达等收进同一环境表示 |
+| [multi-sensor-latent-state](multi-sensor-latent-state.md) | 多传感器压缩成可前滚的潜状态 |
+| [long-tail-scenario](long-tail-scenario.md) | 稀有危险情形；生成/排练补数据 |
 
 > GitHub 可直接渲染上方 Mermaid。本地若看不到图，用 VS Code Mermaid 插件或 Obsidian。
