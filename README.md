@@ -38,6 +38,7 @@
 - [ReconDreamer](notes/recondreamer.md)
 - [WorldDreamer](notes/worlddreamer.md)
 - [Diffusion-based Image Generation](notes/diffusion-based-image-generation.md)
+- [Benchmarks](notes/benchmarks.md)
 - [学习式与规则式规划](notes/learning-vs-rule-based.md)
 - [开环回放](notes/open-loop-replay.md)
 - [可控闭环仿真](notes/controllable-closed-loop.md)

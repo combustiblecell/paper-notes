@@ -75,6 +75,7 @@ flowchart TB
     RDR["ReconDreamer<br/>recondreamer"]
     WDR["WorldDreamer<br/>worlddreamer"]
     DIG["扩散式图像生成<br/>diffusion-based-image-generation"]
+    BENCH["评测基准<br/>benchmarks"]
   end
 
   ARCH -->|"World Model 模块"| WM
@@ -150,6 +151,10 @@ flowchart TB
   DIG -->|"Image 轨的扩散支线"| REPR
   DIG -.->|"骨干对照"| WDR
   DIG -->|"用扩散补稀有数据"| TAIL
+  BENCH -.->|"§6 评测四轨方法"| REPR
+  BENCH -.->|"§6 评测规划器"| PLAN
+  BENCH -.->|"§6 评测开/闭环"| OPEN
+  BENCH -.->|"§6 评测开/闭环"| CLOSED
   REPR -.->|"点云轨 ≠ 雷达 PCE"| PCE
   PLAN -->|"学习式 MPC/想象"| M2
   PLAN -.->|"规则式可审计对照"| M2
@@ -192,6 +197,7 @@ flowchart TB
 2. **形式化** → [world-model-formalization.md](world-model-formalization.md)
 3. **输入与编码** → [heterogeneous-sensors.md](heterogeneous-sensors.md) → [multi-sensor-latent-state.md](multi-sensor-latent-state.md)
 4. **未来怎么画** → [image-bev-og-pc.md](image-bev-og-pc.md)（图像轨：[drivedreamer.md](drivedreamer.md) 生成；[drivedreamer-2.md](drivedreamer-2.md) 文本定制；[recondreamer.md](recondreamer.md) 新轨迹重建；[worlddreamer.md](worlddreamer.md) Transformer 掩码预测走通用世界；[diffusion-based-image-generation.md](diffusion-based-image-generation.md) 综述 §3.1.1 扩散支线谱系）
+5. **怎么评** → [benchmarks.md](benchmarks.md)（综述 §6：CarlaSC/nuScenes/Occ3D/OpenScene 平台 + 4D 生成/点云/占用/规划 四类表）
 5. **轨迹怎么出** → [learning-vs-rule-based.md](learning-vs-rule-based.md)
 6. **怎么评交互** → [open-loop-replay.md](open-loop-replay.md) → [controllable-closed-loop.md](controllable-closed-loop.md)
 7. **为何要想象** → [long-tail-scenario.md](long-tail-scenario.md)
@@ -240,6 +246,7 @@ flowchart TB
 | [recondreamer](recondreamer.md) | 在线修复新轨迹渲染，服务闭环仿真 |
 | [worlddreamer](worlddreamer.md) | VQGAN+STPT 掩码预测 token，Transformer 路线通用世界视频 |
 | [diffusion-based-image-generation](diffusion-based-image-generation.md) | 综述 §3.1.1 图像轨的扩散支线：潜在扩散+多模态条件 |
+| [benchmarks](benchmarks.md) | 综述 §6 评测：5 平台 + 4D 生成/点云/占用/规划 四类任务表 |
 | [learning-vs-rule-based](learning-vs-rule-based.md) | 轨迹：规则可审计 vs 学习能扛交互 |
 | [open-loop-replay](open-loop-replay.md) | 重放既定未来，动作不改下一观测 |
 | [controllable-closed-loop](controllable-closed-loop.md) | 动作改未来，且可编辑/注入长尾 |
