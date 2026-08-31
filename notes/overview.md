@@ -77,6 +77,7 @@ flowchart TB
     DIG["扩散式图像生成<br/>diffusion-based-image-generation"]
     BENCH["评测基准<br/>benchmarks"]
     VOX["体素空间<br/>voxel-space"]
+    LIDAR["激光雷达数据流<br/>lidar-data-flow"]
   end
 
   ARCH -->|"World Model 模块"| WM
@@ -158,6 +159,9 @@ flowchart TB
   BENCH -.->|"§6 评测开/闭环"| CLOSED
   VOX -->|"OG 轨的底座表示"| REPR
   VOX -.->|"省内存迁向高斯"| DIFFM
+  LIDAR -->|"PC 轨输入/输出"| REPR
+  LIDAR -->|"可离散成体素"| VOX
+  LIDAR -.->|"光学测距, 无多普勒, 对照雷达"| ADC
   REPR -.->|"点云轨 ≠ 雷达 PCE"| PCE
   PLAN -->|"学习式 MPC/想象"| M2
   PLAN -.->|"规则式可审计对照"| M2
@@ -251,6 +255,7 @@ flowchart TB
 | [diffusion-based-image-generation](diffusion-based-image-generation.md) | 综述 §3.1.1 图像轨的扩散支线：潜在扩散+多模态条件 |
 | [benchmarks](benchmarks.md) | 综述 §6 评测：5 平台 + 4D 生成/点云/占用/规划 四类任务表 |
 | [voxel-space](voxel-space.md) | 3D 离散网格，OG 占用预报的底座，也作生成-重建中间态 |
+| [lidar-data-flow](lidar-data-flow.md) | LiDAR 点云 P：式1输入 + PC轨未来，常投 range image/体素 |
 | [learning-vs-rule-based](learning-vs-rule-based.md) | 轨迹：规则可审计 vs 学习能扛交互 |
 | [open-loop-replay](open-loop-replay.md) | 重放既定未来，动作不改下一观测 |
 | [controllable-closed-loop](controllable-closed-loop.md) | 动作改未来，且可编辑/注入长尾 |
