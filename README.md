@@ -49,6 +49,7 @@
 
 - [SDDiff（空间-多普勒扩散）](summary/wang-2025-sddiff.md)
 - [世界模型与自动驾驶综述](summary/feng-2025-survey-world-models-ad.md)
+- [脑电 SSVEP 赛题说明](summary/aicomp-eeg-ssvep-contest.md)
 
 ## 工作流
 
